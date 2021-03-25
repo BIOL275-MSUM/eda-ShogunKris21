@@ -1,0 +1,69 @@
+---
+title: "Data set for project"
+author: "Kristofer Sando"
+date: "2/25/2021"
+output: github_document
+---
+
+
+
+## Abstract
+The Komodo Dragon has been known to make astounding physical feats despite being the size of a Crocodile. However recent studies have shown minimized dispersal along with other Island species in the Indonesian Archipelago due to selective processes both indirect and direct. 
+The data presented via this code is the factors observed to find the cause of the reduced Dispersal in the giant Island dwelling lizard (Daily Movement data, Exploration data, and Dispersal Mark Recapture data) Weather it be the island's condition, body size and condition, Prey Biology, or Habitat quality. 
+With all this in mind we simply have to answer the question of what is the cause of the reduced dispersal and is it biological or genetic, and do the humans or climate change have any parts to play in this.
+
+## 2 Introduction
+
+
+## 2 Methods
+
+### 3 Data acquisition
+This step was tedious to say the least. After visiting various websites I acquired the data from dryad after searching for the specific topic on said site (Jessop et al. 2018). The link to the data was posted in the dryad repository and downloaded into excel where it was analyzed before transferring it into Rstudio. The data was divided into three separate tables. The first table was describing daily movement for the Komodo dragons which include the aforementioned variable, weight and ID of the dragons that moved. The second table includes exploration data which tells us that the distance moved was either resident, leaving the site, swimming, and moving to another Island. And the third and final table is the most broad of the three tables. Variables included Age class, Weight, average SVL, body condition, Capture history, komodo dragon density, prey biomass, Inbreeding coefficients and relatedness(R/inbreed), and habitat quality(habpc1). 
+
+### 3 Data preparation
+After downloading the data via PC excel, The data was posted into Rstudio version 1.4.1103 (RStudio Team. 2021) within R version 4.0.3 by using the read_excel function in the readxl package (Wickham and Bryan. 2019) for on all three separate tables. And after a survey of the three tables it was decided that the data in the first two tables should be averaged by Dragon Identification number while the Mark recapture data remains unchanged. 
+
+## 2 Results
+
+
+## 2 Discussion
+
+
+## Literature Cited
+Jessop, Tim S. et al. (2018), Data from: Exploring mechanisms and origins of reduced dispersal in island Komodo dragons, Dryad, Dataset, https://doi.org/10.5061/dryad.2n8055g
+https://datadryad.org/stash/dataset/doi:10.5061/dryad.2n8055g
+
+ RStudio Team (2021). RStudio: Integrated Development Environment for R.
+  RStudio, PBC, Boston, MA URL http://www.rstudio.com/.
+
+R Core Team (2020). R: A language and environment for statistical computing. R
+  Foundation for Statistical Computing, Vienna, Austria. URL
+  https://www.R-project.org/.
+
+Hadley Wickham and Jennifer Bryan (2019). readxl: Read Excel Files. R package
+  version 1.3.1. https://CRAN.R-project.org/package=readxl
+
+Wickham et al., (2019). Welcome to the tidyverse. Journal of Open Source
+  Software, 4(43), 1686, https://doi.org/10.21105/joss.01686
+
+Code
+```{r}
+library(tidyverse) 
+library(readxl)
+
+move <-
+readxl::read_excel(
+  "Data/doi_10.5061_dryad.2n8055g__v1 (2)/Jessop_data.xlsx", sheet = 1)
+
+explore <-
+readxl::read_excel(
+  "Data/doi_10.5061_dryad.2n8055g__v1 (2)/Jessop_data.xlsx", sheet = 2)
+
+markcapturedata <-
+readxl::read_excel(
+  "Data/doi_10.5061_dryad.2n8055g__v1 (2)/Jessop_data.xlsx", sheet = 3)
+
+move
+explore
+markcapturedata
+```
