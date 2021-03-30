@@ -18,11 +18,11 @@ answer the question of what is the cause of the reduced dispersal and is
 it biological or genetic, and do the humans or climate change have any
 parts to play in this.
 
-## 2 Introduction
+## Introduction
 
-## 2 Methods
+## Methods
 
-### 3 Data acquisition
+### Data acquisition
 
 This step was tedious to say the least. After visiting various websites
 I acquired the data from dryad after searching for the specific topic on
@@ -39,7 +39,7 @@ Weight, average SVL, body condition, Capture history, komodo dragon
 density, prey biomass, Inbreeding coefficients and
 relatedness(R/inbreed), and habitat quality(habpc1).
 
-### 3 Data preparation
+### Data preparation
 
 After downloading the data via PC excel, The data was posted into
 Rstudio version 1.4.1103 (RStudio Team. 2021) within R version 4.0.3 by
@@ -49,9 +49,9 @@ tables it was decided that the data in the first two tables should be
 averaged by Dragon Identification number while the Mark recapture data
 remains unchanged.
 
-## 2 Results
+## Results
 
-## 2 Discussion
+## Discussion
 
 ## Literature Cited
 
