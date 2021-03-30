@@ -47,7 +47,14 @@ using the read\_excel function in the readxl package (Wickham and Bryan.
 2019) for on all three separate tables. And after a survey of the three
 tables it was decided that the data in the first two tables should be
 averaged by Dragon Identification number while the Mark recapture data
-remains unchanged.
+remains unchanged. The Daily Movement data is of minimal use as it shows
+how far an individual Komodo Dragon has traveled. The entirety of the
+Exploration Data on the other hand is useful in the sense that the
+individual Komodos have all their movement and exploration data shown to
+be resident and not leaving their site at all. As for Mark and Recapture
+data, the data was averaged by age class and all variables have been
+seen to be useful for the project as they are all factors in the reduced
+dispersal especially the habitat quality.
 
 ## 2 Results
 
