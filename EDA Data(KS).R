@@ -2,21 +2,182 @@ library(tidyverse)
 library(readxl)
 
 move <-
-readxl::read_excel(
-  "Data/doi_10.5061_dryad.2n8055g__v1 (2)/Jessop_data.xlsx", sheet = 1)
+  readxl::read_excel(
+    "Data/doi_10.5061_dryad.2n8055g__v1 (2)/Jessop_data.xlsx", 
+    sheet = 1,
+    range = cell_cols(1:3)
+  ) %>% 
+  rename(
+    dragon_id = DragonID,
+    weight = Weight,
+    daily_move = `daily move(m)`
+  ) %>% 
+  print()
+
 
 explore <-
-readxl::read_excel(
-  "Data/doi_10.5061_dryad.2n8055g__v1 (2)/Jessop_data.xlsx", sheet = 2)
+  readxl::read_excel(
+    "Data/doi_10.5061_dryad.2n8055g__v1 (2)/Jessop_data.xlsx", 
+    sheet = 2,
+    range = cell_cols(1:3)
+  ) %>%
+  rename(
+    dragon_id = ID,
+    site = `site location`,
+    area_explored = explore
+  ) %>%
+  print()
+  
 
 markcapturedata <-
-readxl::read_excel(
-  "Data/doi_10.5061_dryad.2n8055g__v1 (2)/Jessop_data.xlsx", sheet = 3)
+  readxl::read_excel(
+    "Data/doi_10.5061_dryad.2n8055g__v1 (2)/Jessop_data.xlsx", 
+    sheet = 3,
+    range = cell_cols(1:10),
+    na = "--"
+  ) %>%
+  rename(
+    age_class = `Age Class`,
+    weight = Weight,
+    body_length = `Avrg SVL`,
+    body_condition = bodcondition,
+    capture_history = `Capture history`,
+    density = vkdens,
+    prey_biomass = preybio,
+    inbreeding_cof = inbreed,
+    relatedness = R,
+    habitat_condition = habpc1
+  ) %>%
+  mutate(
+    body_condition = as.numeric(body_condition)
+  ) %>% 
+  print()
+
+filter(markcapturedata, is.na(body_condition))
+
 
 move
 explore
 markcapturedata
 
 
-Movement <- ggplot(data = move, aes(x = daily_move, y = weight))
+NewMovement <- group_by (move, dragon_id)
+NewMovement
+
+Averagemove <- summarize(NewMovement, weight = mean(weight, na.rm = TRUE), 
+                         mean_dailymove = mean(daily_move, na.rm = TRUE))
+Averagemove
+
+Exploratory <- group_by(explore, dragon_id)
+Exploratory
+Explored <- summarize(Exploratory, mean_averageexplore = mean(area_explored, na.rm = TRUE))
+
+Komodocapturedata <- group_by(markcapturedata, age_class)
+Komodocapturedata
+Komododata <- summarize(Komodocapturedata, 
+                        weight = mean(weight, na.rm = TRUE),
+                        bodylength = mean(body_length, na.rm = TRUE),
+                        health = mean(body_condition, na.rm = TRUE),
+                        density = mean(density, na.rm = TRUE),
+                        preybio = mean(prey_biomass, na.rm = TRUE),
+                        inbreed = mean(inbreeding_cof, na.rm = TRUE),
+                        R = mean(relatedness, na.rm = TRUE),
+                        mean_habitat = mean(habitat_condition, na.rm = TRUE))
+Komododata                        
+
+ggplot(data = Averagemove) + 
+  geom_histogram(mapping= aes(x = weight), bins = 5, fill = "blue", color = "black") +
+  labs(x = "weight", y = "mean_dailymove") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )
+
+ggplot(data = Komododata) + 
+  geom_histogram(mapping= aes(x = bodylength), bins = 10, fill = "yellow", color = "black") +
+  labs(x = "body length", y = "age_class") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )  
+
+ggplot(data = Komododata) + 
+  geom_histogram(mapping= aes(x = health), bins = 10, fill = "#C5351B", color = "black") +
+  labs(x = "body condition", y = "age_class") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "grey", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )  
+
+ggplot(data = Komododata) + 
+  geom_histogram(mapping= aes(x = preybio), bins = 10, fill = "#C5351B", color = "black") +
+  labs(x = "preybio", y = "age_class") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "red", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )  
+
+ggplot(data = Komododata) + 
+  geom_histogram(mapping= aes(x = density), bins = 10, fill = "grey", color = "black") +
+  labs(x = "density", y = "age_class") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )  
+
+ggplot(data = Komododata) + 
+  geom_histogram(mapping= aes(x = inbreed), bins = 10, fill = "#C5351B", color = "black") +
+  labs(x = "inbreed_cof", y = "age_class") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )  
+
+ggplot(data = Komododata) + 
+  geom_histogram(mapping= aes(x = R), bins = 10, fill = "red", color = "black") +
+  labs(x = "Relatedness", y = "age_class") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )  
+
+ggplot(data = Komododata) + 
+  geom_histogram(mapping= aes(x = mean_habitat), bins = 10, fill = "green", color = "black") +
+  labs(x = "Habitat condition", y = "age_class") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )
 
