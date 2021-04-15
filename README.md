@@ -1,6 +1,11 @@
-Data set for project
-================
+
+![MSUM announces 2021 Football Signing Class \| The Mighty 790 KFGO \|
+KFGO](https://media.socastsrm.com/wordpress/wp-content/blogs.dir/2441/files/2020/02/MSUM-Dragons-logo.jpg)
+
+# Cause of Reduced Dispersal in island Komodo Dragon
+
 Kristofer Sando
+
 2/25/2021
 
 ## Abstract
@@ -19,6 +24,28 @@ it biological or genetic, and do the humans or climate change have any
 parts to play in this.
 
 ## Introduction
+
+The Indonesian archipelago is known to be home to a diverse biological
+marvels and for being the home of dragons. When people hear the name
+dragons they think of the fire-breathing monsters in fairy tales or the
+serpent-like good luck dragons from Chinese myth. But this reptile that
+has been given the namesake of the dragons is very real and very deadly.
+The Komodo Dragon locally known on Komodo Island as an Ora is the
+largest living member of the varanus family of lizards also known as
+Monitor lizards and the apex predators of the Indonesian Islands
+surrounding Komodo Island. It is a creature as astounded as it is
+feared.
+
+Sadly, like many of the famous animals, these great lizards are at the
+mercy of mankind’s wrongdoings in both the sense of deforestation and
+climate change. Due to the changes caused by these two man-made threats
+it is commonly theorized that the population might experience some
+reduced dispersal in their natural habitat. Hence the reason this study
+was conducted, to determine if the cause of the reduced dispersal of the
+Komodo Dragon population is indeed habitat and/or prey loss or climate
+change. While a direct trip to Komodo Island was ill-advised due to
+Covid-19, the internet, specifically the Dryad website (Jessop et al
+2018), proved to be the perfect substitute for data collection.
 
 ## Methods
 
@@ -47,18 +74,55 @@ using the read\_excel function in the readxl package (Wickham and Bryan.
 2019) for on all three separate tables. And after a survey of the three
 tables it was decided that the data in the first two tables should be
 averaged by Dragon Identification number while the Mark recapture data
-remains unchanged. The Daily Movement data is of minimal use as it shows
-how far an individual Komodo Dragon has traveled. The entirety of the
-Exploration Data on the other hand is useful in the sense that the
-individual Komodos have all their movement and exploration data shown to
-be resident and not leaving their site at all. As for Mark and Recapture
-data, the data was averaged by age class and all variables have been
-seen to be useful for the project as they are all factors in the reduced
-dispersal especially the habitat quality.
+remains unchanged for that proccess. The Daily Movement data is of
+minimal use as it shows how far an individual Komodo Dragon has
+traveled. The entirety of the Exploration Data on the other hand is
+useful in the sense that the individual Komodos have all their movement
+and exploration data shown to be resident and not leaving their site at
+all. As for Mark and Recapture data, the data was averaged by age class
+and all variables have been seen to be useful for the project as they
+are all factors in the reduced dispersal especially the habitat quality.
 
 ## Results
 
+After acquisition and preparation, the data was plotted via histogram
+with the y-variable remaining as age-class with the exception of figure
+2 where the average weight (x-axis) of the komodo’s is compared to
+mean-daily movement. And the age class of the komodo dragons were
+compared with other variables as indicated by the figures below.
+
+Figure 1: Habitat condition
+
+Figure 2: Daily movement
+
+Figure 3: Body condition
+
+Figure 4: Inbreeding Coefficient
+
+Figure 5: Body length
+
+Figure 6: Komodo Dragon density
+
+Figure 7: Relatedness
+
+Figure 8: Prey Diversity
+
+Figure 9: Average Weight
+
 ## Discussion
+
+Reduced dispersal in Island ecosystems is a typical phenomenon in
+natural selections and most other studies have yet to truly distinguish
+the causes of said reduction whether they be direct or indirect (Jessop
+et al. 2018). As true as it may be, exploring the mechanisms that cause
+reduced dispersal such as habitat condition, prey diversity, and overall
+health of the organism finding the cause among these mechanisms could be
+extremely useful in the conservation of endangered species such as the
+infamous Komodo Dragon. While poaching and loss in genetic diversity
+might not be the most pressing concern for these great lizards learning
+why they have declined within the last few decades could help to
+preserve the future of not just these dragons but many other endangered
+species.
 
 ## Literature Cited
 
@@ -81,106 +145,3 @@ Wickham et al., (2019). Welcome to the tidyverse. Journal of Open Source
 Software, 4(43), 1686, <https://doi.org/10.21105/joss.01686>
 
 Code
-
-``` r
-library(tidyverse) 
-```
-
-    ## -- Attaching packages --------------------------------------- tidyverse 1.3.0 --
-
-    ## v ggplot2 3.3.3     v purrr   0.3.4
-    ## v tibble  3.0.4     v dplyr   1.0.2
-    ## v tidyr   1.1.2     v stringr 1.4.0
-    ## v readr   1.4.0     v forcats 0.5.0
-
-    ## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
-    ## x dplyr::filter() masks stats::filter()
-    ## x dplyr::lag()    masks stats::lag()
-
-``` r
-library(readxl)
-
-move <-
-readxl::read_excel(
-  "Data/doi_10.5061_dryad.2n8055g__v1 (2)/Jessop_data.xlsx", sheet = 1)
-```
-
-    ## New names:
-    ## * `` -> ...4
-
-``` r
-explore <-
-readxl::read_excel(
-  "Data/doi_10.5061_dryad.2n8055g__v1 (2)/Jessop_data.xlsx", sheet = 2)
-```
-
-    ## New names:
-    ## * `` -> ...4
-
-``` r
-markcapturedata <-
-readxl::read_excel(
-  "Data/doi_10.5061_dryad.2n8055g__v1 (2)/Jessop_data.xlsx", sheet = 3)
-```
-
-    ## New names:
-    ## * `` -> ...11
-
-``` r
-move
-```
-
-    ## # A tibble: 2,921 x 5
-    ##    DragonID Weight `daily move(m)` ...4  Summary                                
-    ##    <chr>     <dbl>           <dbl> <lgl> <chr>                                  
-    ##  1 64D4C0E    0.09            12.6 NA    Daily movement distance (metres) calcu~
-    ##  2 64D4C0E    0.09            25.8 NA    <NA>                                   
-    ##  3 64D4C0E    0.09            29.2 NA    <NA>                                   
-    ##  4 64D4C0E    0.09            37.8 NA    <NA>                                   
-    ##  5 64D4C0E    0.09            57.6 NA    <NA>                                   
-    ##  6 64D4C0E    0.09            58.0 NA    <NA>                                   
-    ##  7 64D4C0E    0.09            59.6 NA    <NA>                                   
-    ##  8 64D4C0E    0.09            77.3 NA    <NA>                                   
-    ##  9 64D4C0E    0.09           119.  NA    <NA>                                   
-    ## 10 64D4C0E    0.09           144.  NA    <NA>                                   
-    ## # ... with 2,911 more rows
-
-``` r
-explore
-```
-
-    ## # A tibble: 4,115 x 5
-    ##    ID     `site location` explore ...4  `Tlemetry derived movement activities c~
-    ##    <chr>  <chr>             <dbl> <lgl> <chr>                                   
-    ##  1 64D12~ K1                    1 NA    1= resident                             
-    ##  2 63A43~ K1                    1 NA    2= leave site                           
-    ##  3 63A43~ K1                    1 NA    3= swimming                             
-    ##  4 63A43~ K1                    1 NA    4=  move onto another island            
-    ##  5 63A43~ K1                    1 NA    <NA>                                    
-    ##  6 63A43~ K1                    1 NA    <NA>                                    
-    ##  7 63A43~ K1                    1 NA    <NA>                                    
-    ##  8 63A43~ K1                    1 NA    <NA>                                    
-    ##  9 63A43~ K1                    1 NA    <NA>                                    
-    ## 10 63A43~ K1                    1 NA    <NA>                                    
-    ## # ... with 4,105 more rows
-
-``` r
-markcapturedata
-```
-
-    ## # A tibble: 1,131 x 13
-    ##    `Age Class` Weight `Avrg SVL` bodcondition `Capture histor~ vkdens preybio
-    ##    <chr>        <dbl>      <dbl> <chr>        <chr>             <dbl>   <dbl>
-    ##  1 Adult         45.2       128. -8.57001060~ AAA0000              13    3286
-    ##  2 Adult         30.6       117. 4.416535101~ AA00000              13    3286
-    ##  3 Adult         40.5       127. 2.635649328~ A000000              13    3286
-    ##  4 Adult         34.6       117. -1.32328655~ AAA0A00              13    3286
-    ##  5 Adult         47.4       126. -2.07639175~ A000000              13    3286
-    ##  6 Adult         28.9       111. -1.01571466~ AA00000              13    3286
-    ##  7 Adult         28.8       113. -1.18236252~ A000000              13    3286
-    ##  8 Adult         58         141. -4.90481686~ ADD0000              13    3286
-    ##  9 Adult         34.4       117. -1.20709108~ A000000              13    3286
-    ## 10 Adult         56         128. -3.72371820~ A000A0A              13    3286
-    ## # ... with 1,121 more rows, and 6 more variables: inbreed <dbl>, R <dbl>,
-    ## #   habpc1 <dbl>, ...11 <lgl>, `Data variable` <chr>, `Defintion (fully
-    ## #   definition in methods)` <chr>

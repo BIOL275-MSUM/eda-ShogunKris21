@@ -14,7 +14,7 @@ KFGO](https://media.socastsrm.com/wordpress/wp-content/blogs.dir/2441/files/2020
 
 # Cause of Reduced Dispersal in island Komodo Dragon
 
-Kristofer Sando
+Kristofer Sando and Chris Merkord
 
 2/25/2021
 
@@ -40,10 +40,11 @@ marvels and for being the home of dragons. When people hear the name
 dragons they think of the fire-breathing monsters in fairy tales or the
 serpent-like good luck dragons from Chinese myth. But this reptile that
 has been given the namesake of the dragons is very real and very deadly.
-The Komodo Dragon locally known as an Ora is the largest living member
-of the varanus family of lizards also known as Monitor lizards and the
-apex predators of the Indonesian Islands surrounding Komodo Island. It
-is a creature as astounded as it is feared.
+The Komodo Dragon locally known on Komodo Island as an Ora is the
+largest living member of the varanus family of lizards also known as
+Monitor lizards and the apex predators of the Indonesian Islands
+surrounding Komodo Island. It is a creature as astounded as it is
+feared.
 
 Sadly, like many of the famous animals, these great lizards are at the
 mercy of mankind's wrongdoings in both the sense of deforestation and
@@ -51,7 +52,7 @@ climate change. Due to the changes caused by these two man-made threats
 it is commonly theorized that the population might experience some
 reduced dispersal in their natural habitat. Hence the reason this study
 was conducted, to determine if the cause of the reduced dispersal of the
-Komodo Dragon population is indeed habitat or prey loss or climate
+Komodo Dragon population is indeed habitat and/or prey loss or climate
 change. While a direct trip to Komodo Island was ill-advised due to
 Covid-19, the internet, specifically the Dryad website (Jessop et al
 2018), proved to be the perfect substitute for data collection.
@@ -83,42 +84,182 @@ using the read_excel function in the readxl package (Wickham and Bryan.
 2019) for on all three separate tables. And after a survey of the three
 tables it was decided that the data in the first two tables should be
 averaged by Dragon Identification number while the Mark recapture data
-remains unchanged. The Daily Movement data is of minimal use as it shows
-how far an individual Komodo Dragon has traveled. The entirety of the
-Exploration Data on the other hand is useful in the sense that the
-individual Komodos have all their movement and exploration data shown to
-be resident and not leaving their site at all. As for Mark and Recapture
-data, the data was averaged by age class and all variables have been
-seen to be useful for the project as they are all factors in the reduced
-dispersal especially the habitat quality.
+remains unchanged for that proccess. The Daily Movement data is of
+minimal use as it shows how far an individual Komodo Dragon has
+traveled. The entirety of the Exploration Data on the other hand is
+useful in the sense that the individual Komodos have all their movement
+and exploration data shown to be resident and not leaving their site at
+all. As for Mark and Recapture data, the data was averaged by age class
+and all variables have been seen to be useful for the project as they
+are all factors in the reduced dispersal especially the habitat quality.
 
 ## Results
 
 After acquisition and preparation, the data was plotted via histogram
-with the y-variable remains as age-class with the exception of figure 2
-where the average weight (x-axis) of the komodo's is compared to
+with the y-variable remaining as age-class with the exception of figure
+2 where the average weight (x-axis) of the komodo's is compared to
 mean-daily movement. And the age class of the komodo dragons were
 compared with other variables as indicated by the figures below.
 
-Figure 1: Habitat
-condition<img src="Habitat Condition 2.png" width="305"/>
+Figure 1: Habitat condition
 
-Figure 2: Daily movement <img src="Average movement 2.png" width="297"/>
+```{r}
+ggplot(data = markcapturedata) + 
+  geom_histogram(mapping= aes(x = habitat_condition), bins = 10, fill = "green", color = "black") +
+  labs(x = "Habitat condition", y = "# of Komodo Dragons") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )
+```
 
-Figure 3: Body condition <img src="Health condition 2.png" width="287"/>
+Figure 2: Daily movement
+
+```{r}
+ggplot(data = Averagemove) + 
+  geom_histogram(mapping= aes(x = mean_dailymove), bins = 5, fill = "blue", color = "black") +
+  labs(x = "average movement", y = "# of Komodo Dragons") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )
+```
+
+Figure 3: Body condition
+
+```{r}
+ggplot(data = markcapturedata) + 
+  geom_histogram(mapping= aes(x = body_condition), bins = 10, fill = "#C5351B", color = "black") +
+  labs(x = "body condition", y = "# of Komodo Dragons") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "grey", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )  
+```
 
 Figure 4: Inbreeding Coefficient
-<img src="Inbreeding coefiecent 2.png" width="305"/>
 
-Figure 5: Body
-length<img src="Ventral to posterior length.png" width="277"/>
+```{r}
+ggplot(data = markcapturedata) + 
+  geom_histogram(mapping= aes(x = inbreeding_cof), bins = 10, fill = "#C5351B", color = "black") +
+  labs(x = "inbreed_cof", y = "# of Komodo Dragons") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  ) 
+```
 
-Figure 6: Population
-density<img src="Population density 2.png" width="281"/>
+Figure 5: Body length
 
-Figure 7: Relatedness<img src="Relatedness 2.png" width="287"/>
+```{r}
+ggplot(data = markcapturedata) + 
+  geom_histogram(mapping= aes(x = body_length), bins = 10, fill = "yellow", color = "black") +
+  labs(x = "body length", y = "# of Komodo Dragons") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )  
+```
 
-Figure 8: Prey Diversity<img src="Prey diversity.png" width="528"/>
+Figure 6: Komodo Dragon density
+
+```{r}
+ggplot(data = markcapturedata) + 
+  geom_histogram(mapping= aes(x = density), bins = 10, fill = "grey", color = "black") +
+  labs(x = "density", y = "# of Komodo Dragons") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )  
+```
+
+Figure 7: Relatedness
+
+```{r}
+ggplot(data = markcapturedata) + 
+  geom_histogram(mapping= aes(x = relatedness), bins = 10, fill = "red", color = "black") +
+  labs(x = "Relatedness", y = "# of Komodo Dragons") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )  
+```
+
+Figure 8: Prey Diversity
+
+```{r}
+ggplot(data = markcapturedata) + 
+  geom_histogram(mapping= aes(x = prey_biomass), bins = 10, fill = "#C5351B", color = "black") +
+  labs(x = "preybio", y = "# of Komodo Dragons") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "red", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )  
+```
+
+Figure 9: Average Weight
+
+```{r}
+ggplot(data = Averagemove) + 
+  geom_histogram(mapping= aes(x = weight), bins = 5, fill = "blue", color = "black") +
+  labs(x = "weight", y = "# of Komodo Dragons") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )
+```
+
+Figure 10:
+```{r}
+ggplot(data = markcapturedata) + 
+  geom_bar(mapping= aes(x = new_age), bins = 10, fill = "green", color = "black") +
+  labs(x = "Age of Komodo Dragon", y = "# of Komodo Dragons") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )
+```
+
 
 ## Discussion
 
