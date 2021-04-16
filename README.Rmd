@@ -105,6 +105,476 @@ komodo's is compared to mean-daily movement. And the number of the
 komodo dragons were compared with other variables as indicated by the
 figures below.
 
+Figure 1: Habitat condition
+
+```{r}
+library(tidyverse) 
+library(readxl)
+
+markcapturedata <-
+  readxl::read_excel(
+    "Data/doi_10.5061_dryad.2n8055g__v1 (2)/Jessop_data.xlsx", 
+    sheet = 3,
+    range = cell_cols(1:10),
+    na = "--"
+  ) %>%
+  rename(
+    age_class = `Age Class`,
+    weight = Weight,
+    body_length = `Avrg SVL`,
+    body_condition = bodcondition,
+    capture_history = `Capture history`,
+    density = vkdens,
+    prey_biomass = preybio,
+    inbreeding_cof = inbreed,
+    relatedness = R,
+    habitat_condition = habpc1
+  ) %>%
+  mutate(
+    body_condition = as.numeric(body_condition)
+  ) %>% 
+  left_join(age_class_corrections) %>%
+  print()
+
+ggplot(data = markcapturedata) + 
+  geom_histogram(mapping= aes(x = habitat_condition), bins = 10, fill = "green", color = "black") +
+  labs(x = "Habitat condition", y = "# of Komodo Dragons") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )
+```
+
+Figure 2: Daily movement
+
+```{r}
+library(tidyverse) 
+library(readxl)
+
+move <-
+  readxl::read_excel(
+    "Data/doi_10.5061_dryad.2n8055g__v1 (2)/Jessop_data.xlsx", 
+    sheet = 1,
+    range = cell_cols(1:3)
+  ) %>% 
+  rename(
+    dragon_id = DragonID,
+    weight = Weight,
+    daily_move = `daily move(m)`
+  ) %>% 
+  print()
+
+NewMovement <- group_by (move, dragon_id)
+NewMovement
+
+Averagemove <- summarize(NewMovement, weight = mean(weight, na.rm = TRUE), 
+                         mean_dailymove = mean(daily_move, na.rm = TRUE))
+Averagemove
+
+ggplot(data = Averagemove) + 
+  geom_histogram(mapping= aes(x = mean_dailymove), bins = 5, fill = "blue", color = "black") +
+  labs(x = "average movement", y = "# of Komodo Dragons") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )
+```
+
+Figure 3: Body condition
+
+```{r}
+
+library(tidyverse) 
+library(readxl)
+
+markcapturedata <-
+  readxl::read_excel(
+    "Data/doi_10.5061_dryad.2n8055g__v1 (2)/Jessop_data.xlsx", 
+    sheet = 3,
+    range = cell_cols(1:10),
+    na = "--"
+  ) %>%
+  rename(
+    age_class = `Age Class`,
+    weight = Weight,
+    body_length = `Avrg SVL`,
+    body_condition = bodcondition,
+    capture_history = `Capture history`,
+    density = vkdens,
+    prey_biomass = preybio,
+    inbreeding_cof = inbreed,
+    relatedness = R,
+    habitat_condition = habpc1
+  ) %>%
+  mutate(
+    body_condition = as.numeric(body_condition)
+  ) %>% 
+  left_join(age_class_corrections) %>%
+  print()
+
+ggplot(data = markcapturedata) + 
+  geom_histogram(mapping= aes(x = body_condition), bins = 10, fill = "#C5351B", color = "black") +
+  labs(x = "body condition", y = "# of Komodo Dragons") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "grey", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  ) 
+```
+
+Figure 4: Inbreeding Coefficient
+
+```{r}
+
+library(tidyverse) 
+library(readxl)
+
+markcapturedata <-
+  readxl::read_excel(
+    "Data/doi_10.5061_dryad.2n8055g__v1 (2)/Jessop_data.xlsx", 
+    sheet = 3,
+    range = cell_cols(1:10),
+    na = "--"
+  ) %>%
+  rename(
+    age_class = `Age Class`,
+    weight = Weight,
+    body_length = `Avrg SVL`,
+    body_condition = bodcondition,
+    capture_history = `Capture history`,
+    density = vkdens,
+    prey_biomass = preybio,
+    inbreeding_cof = inbreed,
+    relatedness = R,
+    habitat_condition = habpc1
+  ) %>%
+  mutate(
+    body_condition = as.numeric(body_condition)
+  ) %>% 
+  left_join(age_class_corrections) %>%
+  print()
+
+ggplot(data = markcapturedata) + 
+  geom_histogram(mapping= aes(x = inbreeding_cof), bins = 10, fill = "#C5351B", color = "black") +
+  labs(x = "inbreed_cof", y = "# of Komodo Dragons") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )  
+```
+
+Figure 5: Body length
+
+```{r}
+
+library(tidyverse) 
+library(readxl)
+
+markcapturedata <-
+  readxl::read_excel(
+    "Data/doi_10.5061_dryad.2n8055g__v1 (2)/Jessop_data.xlsx", 
+    sheet = 3,
+    range = cell_cols(1:10),
+    na = "--"
+  ) %>%
+  rename(
+    age_class = `Age Class`,
+    weight = Weight,
+    body_length = `Avrg SVL`,
+    body_condition = bodcondition,
+    capture_history = `Capture history`,
+    density = vkdens,
+    prey_biomass = preybio,
+    inbreeding_cof = inbreed,
+    relatedness = R,
+    habitat_condition = habpc1
+  ) %>%
+  mutate(
+    body_condition = as.numeric(body_condition)
+  ) %>% 
+  left_join(age_class_corrections) %>%
+  print()
+
+ggplot(data = markcapturedata) + 
+  geom_histogram(mapping= aes(x = body_length), bins = 10, fill = "yellow", color = "black") +
+  labs(x = "body length", y = "# of Komodo Dragons") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )  
+```
+
+Figure 6: Komodo Dragon density
+
+```{r}
+library(tidyverse) 
+library(readxl)
+
+markcapturedata <-
+  readxl::read_excel(
+    "Data/doi_10.5061_dryad.2n8055g__v1 (2)/Jessop_data.xlsx", 
+    sheet = 3,
+    range = cell_cols(1:10),
+    na = "--"
+  ) %>%
+  rename(
+    age_class = `Age Class`,
+    weight = Weight,
+    body_length = `Avrg SVL`,
+    body_condition = bodcondition,
+    capture_history = `Capture history`,
+    density = vkdens,
+    prey_biomass = preybio,
+    inbreeding_cof = inbreed,
+    relatedness = R,
+    habitat_condition = habpc1
+  ) %>%
+  mutate(
+    body_condition = as.numeric(body_condition)
+  ) %>% 
+  left_join(age_class_corrections) %>%
+  print()
+
+ggplot(data = markcapturedata) + 
+  geom_histogram(mapping= aes(x = density), bins = 10, fill = "grey", color = "black") +
+  labs(x = "density", y = "# of Komodo Dragons") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )  
+```
+
+Figure 7: Relatedness
+
+```{r}
+library(tidyverse) 
+library(readxl)
+
+markcapturedata <-
+  readxl::read_excel(
+    "Data/doi_10.5061_dryad.2n8055g__v1 (2)/Jessop_data.xlsx", 
+    sheet = 3,
+    range = cell_cols(1:10),
+    na = "--"
+  ) %>%
+  rename(
+    age_class = `Age Class`,
+    weight = Weight,
+    body_length = `Avrg SVL`,
+    body_condition = bodcondition,
+    capture_history = `Capture history`,
+    density = vkdens,
+    prey_biomass = preybio,
+    inbreeding_cof = inbreed,
+    relatedness = R,
+    habitat_condition = habpc1
+  ) %>%
+  mutate(
+    body_condition = as.numeric(body_condition)
+  ) %>% 
+  left_join(age_class_corrections) %>%
+  print()
+
+ggplot(data = markcapturedata) + 
+  geom_histogram(mapping= aes(x = relatedness), bins = 10, fill = "red", color = "black") +
+  labs(x = "Relatedness", y = "# of Komodo Dragons") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )  
+```
+
+Figure 8: Prey Diversity
+
+```{r}
+library(tidyverse) 
+library(readxl)
+
+markcapturedata <-
+  readxl::read_excel(
+    "Data/doi_10.5061_dryad.2n8055g__v1 (2)/Jessop_data.xlsx", 
+    sheet = 3,
+    range = cell_cols(1:10),
+    na = "--"
+  ) %>%
+  rename(
+    age_class = `Age Class`,
+    weight = Weight,
+    body_length = `Avrg SVL`,
+    body_condition = bodcondition,
+    capture_history = `Capture history`,
+    density = vkdens,
+    prey_biomass = preybio,
+    inbreeding_cof = inbreed,
+    relatedness = R,
+    habitat_condition = habpc1
+  ) %>%
+  mutate(
+    body_condition = as.numeric(body_condition)
+  ) %>% 
+  left_join(age_class_corrections) %>%
+  print()
+
+ggplot(data = markcapturedata) + 
+  geom_histogram(mapping= aes(x = prey_biomass), bins = 10, fill = "#C5351B", color = "black") +
+  labs(x = "preybio", y = "# of Komodo Dragons") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "red", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  ) 
+```
+
+Figure 9: Average Weight
+
+```{r}
+library(tidyverse) 
+library(readxl)
+
+move <-
+  readxl::read_excel(
+    "Data/doi_10.5061_dryad.2n8055g__v1 (2)/Jessop_data.xlsx", 
+    sheet = 1,
+    range = cell_cols(1:3)
+  ) %>% 
+  rename(
+    dragon_id = DragonID,
+    weight = Weight,
+    daily_move = `daily move(m)`
+  ) %>% 
+  print()
+
+NewMovement <- group_by (move, dragon_id)
+NewMovement
+
+Averagemove <- summarize(NewMovement, weight = mean(weight, na.rm = TRUE), 
+                         mean_dailymove = mean(daily_move, na.rm = TRUE))
+Averagemove
+
+ggplot(data = Averagemove) + 
+  geom_histogram(mapping= aes(x = weight), bins = 5, fill = "blue", color = "black") +
+  labs(x = "weight", y = "# of Komodo Dragons") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )
+```
+
+Figure 10: Age Class
+
+```{r}
+library(tidyverse) 
+library(readxl)
+
+markcapturedata <-
+  readxl::read_excel(
+    "Data/doi_10.5061_dryad.2n8055g__v1 (2)/Jessop_data.xlsx", 
+    sheet = 3,
+    range = cell_cols(1:10),
+    na = "--"
+  ) %>%
+  rename(
+    age_class = `Age Class`,
+    weight = Weight,
+    body_length = `Avrg SVL`,
+    body_condition = bodcondition,
+    capture_history = `Capture history`,
+    density = vkdens,
+    prey_biomass = preybio,
+    inbreeding_cof = inbreed,
+    relatedness = R,
+    habitat_condition = habpc1
+  ) %>%
+  mutate(
+    body_condition = as.numeric(body_condition)
+  ) %>% 
+  left_join(age_class_corrections) %>%
+  print()
+
+ggplot(data = markcapturedata) + 
+  geom_bar(mapping= aes(x = new_age), bins = 10, fill = "green", color = "black") +
+  labs(x = "Age of Komodo Dragon", y = "# of Komodo Dragons") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )
+```
+
+## Discussion
+
+Reduced dispersal in Island ecosystems is a typical phenomenon in
+natural selections and most other studies have yet to truly distinguish
+the causes of said reduction whether they be direct or indirect (Jessop
+et al. 2018). As true as it may be, exploring the mechanisms that cause
+reduced dispersal such as habitat condition, prey diversity, and overall
+health of the organism finding the cause among these mechanisms could be
+extremely useful in the conservation of endangered species such as the
+infamous Komodo Dragon. While poaching and loss in genetic diversity
+might not be the most pressing concern for these great lizards learning
+why they have declined within the last few decades could help to
+preserve the future of not just these dragons but many other endangered
+species.
+
+## Literature Cited
+
+Jessop, Tim S. et al. (2018), Data from: Exploring mechanisms and
+origins of reduced dispersal in island Komodo dragons, Dryad, Dataset,
+<https://doi.org/10.5061/dryad.2n8055g>
+<https://datadryad.org/stash/dataset/doi:10.5061/dryad.2n8055g>
+
+RStudio Team (2021). RStudio: Integrated Development Environment for R.
+RStudio, PBC, Boston, MA URL <http://www.rstudio.com/>.
+
+R Core Team (2020). R: A language and environment for statistical
+computing. R Foundation for Statistical Computing, Vienna, Austria. URL
+<https://www.R-project.org/>.
+
+Hadley Wickham and Jennifer Bryan (2019). readxl: Read Excel Files. R
+package version 1.3.1. <https://CRAN.R-project.org/package=readxl>
+
+Wickham et al., (2019). Welcome to the tidyverse. Journal of Open Source
+Software, 4(43), 1686, <https://doi.org/10.21105/joss.01686>
+
+Code
+
 ```{r}
 library(tidyverse) 
 library(readxl)
@@ -185,7 +655,6 @@ age_class_corrections <- tribble(
   "Sub Adullt","Sub Adult"
 )
   
-age_class_corrections
 
 NewMovement <- group_by (move, dragon_id)
 NewMovement
@@ -209,140 +678,8 @@ Komododata <- summarize(Komodocapturedata,
                         inbreed = mean(inbreeding_cof, na.rm = TRUE),
                         R = mean(relatedness, na.rm = TRUE),
                         mean_habitat = mean(habitat_condition, na.rm = TRUE))
-Komododata  
-```
+Komododata                        
 
-Figure 1: Habitat condition
-
-```{r}
-ggplot(data = markcapturedata) + 
-  geom_histogram(mapping= aes(x = habitat_condition), bins = 10, fill = "green", color = "black") +
-  labs(x = "Habitat condition", y = "# of Komodo Dragons") + 
-  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
-  theme_classic(base_size = 10) +
-  theme(
-    axis.title = element_text(face = "bold"),
-    axis.text = element_text(color = "black", size = rel(1)),
-    axis.text.x = element_text(angle = 55, hjust = 1),
-    axis.ticks.x = element_blank()
-  )
-```
-
-Figure 2: Daily movement
-
-```{r}
-ggplot(data = Averagemove) + 
-  geom_histogram(mapping= aes(x = mean_dailymove), bins = 5, fill = "blue", color = "black") +
-  labs(x = "average movement", y = "# of Komodo Dragons") + 
-  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
-  theme_classic(base_size = 10) +
-  theme(
-    axis.title = element_text(face = "bold"),
-    axis.text = element_text(color = "black", size = rel(1)),
-    axis.text.x = element_text(angle = 55, hjust = 1),
-    axis.ticks.x = element_blank()
-  )
-```
-
-Figure 3: Body condition
-
-```{r}
-ggplot(data = markcapturedata) + 
-  geom_histogram(mapping= aes(x = body_condition), bins = 10, fill = "#C5351B", color = "black") +
-  labs(x = "body condition", y = "# of Komodo Dragons") + 
-  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
-  theme_classic(base_size = 10) +
-  theme(
-    axis.title = element_text(face = "bold"),
-    axis.text = element_text(color = "grey", size = rel(1)),
-    axis.text.x = element_text(angle = 55, hjust = 1),
-    axis.ticks.x = element_blank()
-  ) 
-```
-
-Figure 4: Inbreeding Coefficient
-
-```{r}
-ggplot(data = markcapturedata) + 
-  geom_histogram(mapping= aes(x = inbreeding_cof), bins = 10, fill = "#C5351B", color = "black") +
-  labs(x = "inbreed_cof", y = "# of Komodo Dragons") + 
-  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
-  theme_classic(base_size = 10) +
-  theme(
-    axis.title = element_text(face = "bold"),
-    axis.text = element_text(color = "black", size = rel(1)),
-    axis.text.x = element_text(angle = 55, hjust = 1),
-    axis.ticks.x = element_blank()
-  )  
-```
-
-Figure 5: Body length
-
-```{r}
-ggplot(data = markcapturedata) + 
-  geom_histogram(mapping= aes(x = body_length), bins = 10, fill = "yellow", color = "black") +
-  labs(x = "body length", y = "# of Komodo Dragons") + 
-  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
-  theme_classic(base_size = 10) +
-  theme(
-    axis.title = element_text(face = "bold"),
-    axis.text = element_text(color = "black", size = rel(1)),
-    axis.text.x = element_text(angle = 55, hjust = 1),
-    axis.ticks.x = element_blank()
-  )  
-```
-
-Figure 6: Komodo Dragon density
-
-```{r}
-ggplot(data = markcapturedata) + 
-  geom_histogram(mapping= aes(x = density), bins = 10, fill = "grey", color = "black") +
-  labs(x = "density", y = "# of Komodo Dragons") + 
-  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
-  theme_classic(base_size = 10) +
-  theme(
-    axis.title = element_text(face = "bold"),
-    axis.text = element_text(color = "black", size = rel(1)),
-    axis.text.x = element_text(angle = 55, hjust = 1),
-    axis.ticks.x = element_blank()
-  )  
-```
-
-Figure 7: Relatedness
-
-```{r}
-ggplot(data = markcapturedata) + 
-  geom_histogram(mapping= aes(x = relatedness), bins = 10, fill = "red", color = "black") +
-  labs(x = "Relatedness", y = "# of Komodo Dragons") + 
-  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
-  theme_classic(base_size = 10) +
-  theme(
-    axis.title = element_text(face = "bold"),
-    axis.text = element_text(color = "black", size = rel(1)),
-    axis.text.x = element_text(angle = 55, hjust = 1),
-    axis.ticks.x = element_blank()
-  )  
-```
-
-Figure 8: Prey Diversity
-
-```{r}
-ggplot(data = markcapturedata) + 
-  geom_histogram(mapping= aes(x = prey_biomass), bins = 10, fill = "#C5351B", color = "black") +
-  labs(x = "preybio", y = "# of Komodo Dragons") + 
-  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
-  theme_classic(base_size = 10) +
-  theme(
-    axis.title = element_text(face = "bold"),
-    axis.text = element_text(color = "red", size = rel(1)),
-    axis.text.x = element_text(angle = 55, hjust = 1),
-    axis.ticks.x = element_blank()
-  ) 
-```
-
-Figure 9: Average Weight
-
-```{r}
 ggplot(data = Averagemove) + 
   geom_histogram(mapping= aes(x = weight), bins = 5, fill = "blue", color = "black") +
   labs(x = "weight", y = "# of Komodo Dragons") + 
@@ -354,11 +691,103 @@ ggplot(data = Averagemove) +
     axis.text.x = element_text(angle = 55, hjust = 1),
     axis.ticks.x = element_blank()
   )
-```
 
-Figure 10: Age Class
+ggplot(data = Averagemove) + 
+  geom_histogram(mapping= aes(x = mean_dailymove), bins = 5, fill = "blue", color = "black") +
+  labs(x = "average movement", y = "# of Komodo Dragons") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )
 
-```{r}
+ggplot(data = markcapturedata) + 
+  geom_histogram(mapping= aes(x = body_length), bins = 10, fill = "yellow", color = "black") +
+  labs(x = "body length", y = "# of Komodo Dragons") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )  
+
+ggplot(data = markcapturedata) + 
+  geom_histogram(mapping= aes(x = body_condition), bins = 10, fill = "#C5351B", color = "black") +
+  labs(x = "body condition", y = "# of Komodo Dragons") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "grey", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )  
+
+ggplot(data = markcapturedata) + 
+  geom_histogram(mapping= aes(x = prey_biomass), bins = 10, fill = "#C5351B", color = "black") +
+  labs(x = "preybio", y = "# of Komodo Dragons") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "red", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )  
+
+ggplot(data = markcapturedata) + 
+  geom_histogram(mapping= aes(x = density), bins = 10, fill = "grey", color = "black") +
+  labs(x = "density", y = "# of Komodo Dragons") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )  
+
+ggplot(data = markcapturedata) + 
+  geom_histogram(mapping= aes(x = inbreeding_cof), bins = 10, fill = "#C5351B", color = "black") +
+  labs(x = "inbreed_cof", y = "# of Komodo Dragons") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )  
+
+ggplot(data = markcapturedata) + 
+  geom_histogram(mapping= aes(x = relatedness), bins = 10, fill = "red", color = "black") +
+  labs(x = "Relatedness", y = "# of Komodo Dragons") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )  
+
+ggplot(data = markcapturedata) + 
+  geom_histogram(mapping= aes(x = habitat_condition), bins = 10, fill = "green", color = "black") +
+  labs(x = "Habitat condition", y = "# of Komodo Dragons") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )
+
 ggplot(data = markcapturedata) + 
   geom_bar(mapping= aes(x = new_age), bins = 10, fill = "green", color = "black") +
   labs(x = "Age of Komodo Dragon", y = "# of Komodo Dragons") + 
@@ -370,62 +799,5 @@ ggplot(data = markcapturedata) +
     axis.text.x = element_text(angle = 55, hjust = 1),
     axis.ticks.x = element_blank()
   )
-```
 
-## Discussion
-
-Reduced dispersal in Island ecosystems is a typical phenomenon in
-natural selections and most other studies have yet to truly distinguish
-the causes of said reduction whether they be direct or indirect (Jessop
-et al. 2018). As true as it may be, exploring the mechanisms that cause
-reduced dispersal such as habitat condition, prey diversity, and overall
-health of the organism finding the cause among these mechanisms could be
-extremely useful in the conservation of endangered species such as the
-infamous Komodo Dragon. While poaching and loss in genetic diversity
-might not be the most pressing concern for these great lizards learning
-why they have declined within the last few decades could help to
-preserve the future of not just these dragons but many other endangered
-species.
-
-## Literature Cited
-
-Jessop, Tim S. et al. (2018), Data from: Exploring mechanisms and
-origins of reduced dispersal in island Komodo dragons, Dryad, Dataset,
-<https://doi.org/10.5061/dryad.2n8055g>
-<https://datadryad.org/stash/dataset/doi:10.5061/dryad.2n8055g>
-
-RStudio Team (2021). RStudio: Integrated Development Environment for R.
-RStudio, PBC, Boston, MA URL <http://www.rstudio.com/>.
-
-R Core Team (2020). R: A language and environment for statistical
-computing. R Foundation for Statistical Computing, Vienna, Austria. URL
-<https://www.R-project.org/>.
-
-Hadley Wickham and Jennifer Bryan (2019). readxl: Read Excel Files. R
-package version 1.3.1. <https://CRAN.R-project.org/package=readxl>
-
-Wickham et al., (2019). Welcome to the tidyverse. Journal of Open Source
-Software, 4(43), 1686, <https://doi.org/10.21105/joss.01686>
-
-Code
-
-```{r}
-library(tidyverse) 
-library(readxl)
-
-move <-
-readxl::read_excel(
-  "Data/doi_10.5061_dryad.2n8055g__v1 (2)/Jessop_data.xlsx", sheet = 1)
-
-explore <-
-readxl::read_excel(
-  "Data/doi_10.5061_dryad.2n8055g__v1 (2)/Jessop_data.xlsx", sheet = 2)
-
-markcapturedata <-
-readxl::read_excel(
-  "Data/doi_10.5061_dryad.2n8055g__v1 (2)/Jessop_data.xlsx", sheet = 3)
-
-move
-explore
-markcapturedata
 ```
