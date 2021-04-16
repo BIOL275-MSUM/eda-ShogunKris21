@@ -35,6 +35,9 @@ parts to play in this.
 
 ## Introduction
 
+![Komodo National Park Facts & Information - Beautiful World Travel
+Guide](https://www.beautifulworld.com/wp-content/uploads/2016/10/map-of-komodo-island.jpg)
+
 The Indonesian archipelago is known to be home to a diverse biological
 marvels and for being the home of dragons. When people hear the name
 dragons they think of the fire-breathing monsters in fairy tales or the
@@ -96,10 +99,11 @@ are all factors in the reduced dispersal especially the habitat quality.
 ## Results
 
 After acquisition and preparation, the data was plotted via histogram
-with the y-variable remaining as age-class with the exception of figure
-2 where the average weight (x-axis) of the komodo's is compared to
-mean-daily movement. And the age class of the komodo dragons were
-compared with other variables as indicated by the figures below.
+with the y-variable remaining as number of Komodo Dragon(Fig 1 and 3-10)
+with the exception of figure 2 where the average weight (x-axis) of the
+komodo's is compared to mean-daily movement. And the number of the
+komodo dragons were compared with other variables as indicated by the
+figures below.
 
 Figure 1: Habitat condition
 
