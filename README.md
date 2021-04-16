@@ -4,7 +4,7 @@ KFGO](https://media.socastsrm.com/wordpress/wp-content/blogs.dir/2441/files/2020
 
 # Cause of Reduced Dispersal in island Komodo Dragon
 
-Kristofer Sando
+Kristofer Sando and Chris Merkord
 
 2/25/2021
 
@@ -93,21 +93,43 @@ compared with other variables as indicated by the figures below.
 
 Figure 1: Habitat condition
 
+![](Habitat%20condition.png)
+
 Figure 2: Daily movement
+
+![](Average%20move%20of%20individual%20Komodos.png)
 
 Figure 3: Body condition
 
+![](Final%20Body%20Condition.png)
+
 Figure 4: Inbreeding Coefficient
+
+![](Inbreed%20cof.png)
 
 Figure 5: Body length
 
+![](Komodo%20Body%20Length.png)
+
 Figure 6: Komodo Dragon density
+
+![](Komodo%20Dragon%20Density.png)
 
 Figure 7: Relatedness
 
+![](Final%20Relatedness.png)
+
 Figure 8: Prey Diversity
 
+![](Final%20Prey%20Bio.png)
+
 Figure 9: Average Weight
+
+![](Weight%20of%20Komodos.png)
+
+Figure 10: Age Class
+
+![](Age%20Category.png)
 
 ## Discussion
 
