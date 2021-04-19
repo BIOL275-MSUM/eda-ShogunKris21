@@ -101,41 +101,244 @@ figures below.
 
 Figure 1: Habitat condition
 
+``` r
+library(tidyverse) 
+library(readxl)
+
+age_class_corrections <- tribble(
+  ~age_class, ~new_age,
+  "Adult","Adult",
+  "Juvenile","Juvenile",
+  "Post Hatchling","Post Hatchling",
+  "Sub Adult","Sub Adult",
+  "Hatchling", "Hatchling",
+  "Post hatchling","Post Hatchling",
+  "Subadult","Sub Adult",
+  "Sub adult","Sub Adult",
+  "Adut","Adult",
+  "Post-hatch","Post Hatchling",
+  "Sub Adullt","Sub Adult"
+)
+
+markcapturedata <-
+  readxl::read_excel(
+    "Data/doi_10.5061_dryad.2n8055g__v1 (2)/Jessop_data.xlsx", 
+    sheet = 3,
+    range = cell_cols(1:10),
+    na = "--"
+  ) %>%
+  rename(
+    age_class = `Age Class`,
+    weight = Weight,
+    body_length = `Avrg SVL`,
+    body_condition = bodcondition,
+    capture_history = `Capture history`,
+    density = vkdens,
+    prey_biomass = preybio,
+    inbreeding_cof = inbreed,
+    relatedness = R,
+    habitat_condition = habpc1
+  ) %>%
+  mutate(
+    body_condition = as.numeric(body_condition)
+  ) %>% 
+  left_join(age_class_corrections) %>%
+  print()
+
+ggplot(data = markcapturedata) + 
+  geom_histogram(mapping= aes(x = habitat_condition), bins = 10, fill = "green", color = "black") +
+  labs(x = "Habitat condition", y = "# of Komodo Dragons") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )
+```
+
 ![](README_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
 
 Figure 2: Daily movement
+
+``` r
+move <-
+  readxl::read_excel(
+    "Data/doi_10.5061_dryad.2n8055g__v1 (2)/Jessop_data.xlsx", 
+    sheet = 1,
+    range = cell_cols(1:3)
+  ) %>% 
+  rename(
+    dragon_id = DragonID,
+    weight = Weight,
+    daily_move = `daily move(m)`
+  ) %>% 
+  print()
+
+NewMovement <- group_by (move, dragon_id)
+
+
+Averagemove <- summarize(NewMovement, weight = mean(weight, na.rm = TRUE), 
+                         mean_dailymove = mean(daily_move, na.rm = TRUE))
+
+
+ggplot(data = Averagemove) + 
+  geom_histogram(mapping= aes(x = mean_dailymove), bins = 5, fill = "blue", color = "black") +
+  labs(x = "average movement", y = "# of Komodo Dragons") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )
+```
 
 ![](README_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
 
 Figure 3: Body condition
 
+``` r
+ggplot(data = markcapturedata) + 
+  geom_histogram(mapping= aes(x = body_condition), bins = 10, fill = "#C5351B", color = "black") +
+  labs(x = "body condition", y = "# of Komodo Dragons") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "grey", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  ) 
+```
+
 ![](README_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
 Figure 4: Inbreeding Coefficient
+
+``` r
+ggplot(data = markcapturedata) + 
+  geom_histogram(mapping= aes(x = inbreeding_cof), bins = 10, fill = "#C5351B", color = "black") +
+  labs(x = "inbreed_cof", y = "# of Komodo Dragons") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )  
+```
 
 ![](README_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
 Figure 5: Body length
 
+``` r
+ggplot(data = markcapturedata) + 
+  geom_histogram(mapping= aes(x = body_length), bins = 10, fill = "yellow", color = "black") +
+  labs(x = "body length", y = "# of Komodo Dragons") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )  
+```
+
 ![](README_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
 Figure 6: Komodo Dragon density
+
+``` r
+ggplot(data = markcapturedata) + 
+  geom_histogram(mapping= aes(x = density), bins = 10, fill = "grey", color = "black") +
+  labs(x = "density", y = "# of Komodo Dragons") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )  
+```
 
 ![](README_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
 Figure 7: Relatedness
 
+``` r
+ggplot(data = markcapturedata) + 
+  geom_histogram(mapping= aes(x = relatedness), bins = 10, fill = "red", color = "black") +
+  labs(x = "Relatedness", y = "# of Komodo Dragons") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )  
+```
+
 ![](README_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
 
 Figure 8: Prey Diversity
+
+``` r
+ggplot(data = markcapturedata) + 
+  geom_histogram(mapping= aes(x = prey_biomass), bins = 10, fill = "#C5351B", color = "black") +
+  labs(x = "preybio", y = "# of Komodo Dragons") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "red", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  ) 
+```
 
 ![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
 Figure 9: Average Weight
 
+``` r
+ggplot(data = Averagemove) + 
+  geom_histogram(mapping= aes(x = weight), bins = 5, fill = "blue", color = "black") +
+  labs(x = "weight", y = "# of Komodo Dragons") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )
+```
+
 ![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
 
 Figure 10: Age Class
+
+``` r
+ggplot(data = markcapturedata) + 
+  geom_bar(mapping= aes(x = new_age), bins = 10, fill = "green", color = "black") +
+  labs(x = "Age of Komodo Dragon", y = "# of Komodo Dragons") + 
+  scale_y_continuous(limits = c(NA, NA), expand = expansion(mult = 0)) +
+  theme_classic(base_size = 10) +
+  theme(
+    axis.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black", size = rel(1)),
+    axis.text.x = element_text(angle = 55, hjust = 1),
+    axis.ticks.x = element_blank()
+  )
+```
 
 ![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
 
