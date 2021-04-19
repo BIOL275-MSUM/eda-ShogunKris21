@@ -28,6 +28,20 @@ explore <-
   ) %>%
   print()
   
+age_class_corrections <- tribble(
+  ~age_class, ~new_age,
+  "Adult","Adult",
+  "Juvenile","Juvenile",
+  "Post Hatchling","Post Hatchling",
+  "Sub Adult","Sub Adult",
+  "Hatchling", "Hatchling",
+  "Post hatchling","Post Hatchling",
+  "Subadult","Sub Adult",
+  "Sub adult","Sub Adult",
+  "Adut","Adult",
+  "Post-hatch","Post Hatchling",
+  "Sub Adullt","Sub Adult"
+)
 
 markcapturedata <-
   readxl::read_excel(
@@ -62,21 +76,7 @@ explore
 markcapturedata
 
 distinct(markcapturedata,age_class)
-age_class_corrections <- tribble(
-  ~age_class, ~new_age,
-  "Adult","Adult",
-  "Juvenile","Juvenile",
-  "Post Hatchling","Post Hatchling",
-  "Sub Adult","Sub Adult",
-  "Hatchling", "Hatchling",
-  "Post hatchling","Post Hatchling",
-  "Subadult","Sub Adult",
-  "Sub adult","Sub Adult",
-  "Adut","Adult",
-  "Post-hatch","Post Hatchling",
-  "Sub Adullt","Sub Adult"
-)
-  
+
 
 NewMovement <- group_by (move, dragon_id)
 NewMovement

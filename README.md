@@ -1,12 +1,16 @@
 
-![MSUM announces 2021 Football Signing Class \| The Mighty 790 KFGO \|
-KFGO](https://media.socastsrm.com/wordpress/wp-content/blogs.dir/2441/files/2020/02/MSUM-Dragons-logo.jpg)
+<img src="https://www2.mnstate.edu/uploadedImages/Content/Marketing/logos/MSUM_Signature_Vert_Color.jpg" alt="MSUM logo" width="200" style="float:right">
 
 # Cause of Reduced Dispersal in island Komodo Dragon
 
 Kristofer Sando and Chris Merkord
 
 2/25/2021
+
+Presentation ID: 4931
+
+Biosciences Department, Minnesota State University Moorhead, 1104 7th
+Avenue South, Moorhead, MN 56563 USA
 
 ## Abstract
 
@@ -97,43 +101,43 @@ figures below.
 
 Figure 1: Habitat condition
 
-![](Habitat%20condition.png)
+![](README_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
 
 Figure 2: Daily movement
 
-![](Average%20move%20of%20individual%20Komodos.png)
+![](README_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
 
 Figure 3: Body condition
 
-![](Final%20Body%20Condition.png)
+![](README_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
 Figure 4: Inbreeding Coefficient
 
-![](Inbreed%20cof.png)
+![](README_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
 Figure 5: Body length
 
-![](Komodo%20Body%20Length.png)
+![](README_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
 Figure 6: Komodo Dragon density
 
-![](Komodo%20Dragon%20Density.png)
+![](README_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
 Figure 7: Relatedness
 
-![](Final%20Relatedness.png)
+![](README_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
 
 Figure 8: Prey Diversity
 
-![](Final%20Prey%20Bio.png)
+![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
 Figure 9: Average Weight
 
-![](Weight%20of%20Komodos.png)
+![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
 
 Figure 10: Age Class
 
-![](Age%20Category.png)
+![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
 
 ## Discussion
 
@@ -171,3 +175,5 @@ Wickham et al., (2019). Welcome to the tidyverse. Journal of Open Source
 Software, 4(43), 1686, <https://doi.org/10.21105/joss.01686>
 
 Code
+
+![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->![](README_files/figure-gfm/unnamed-chunk-11-2.png)<!-- -->![](README_files/figure-gfm/unnamed-chunk-11-3.png)<!-- -->![](README_files/figure-gfm/unnamed-chunk-11-4.png)<!-- -->![](README_files/figure-gfm/unnamed-chunk-11-5.png)<!-- -->![](README_files/figure-gfm/unnamed-chunk-11-6.png)<!-- -->![](README_files/figure-gfm/unnamed-chunk-11-7.png)<!-- -->![](README_files/figure-gfm/unnamed-chunk-11-8.png)<!-- -->![](README_files/figure-gfm/unnamed-chunk-11-9.png)<!-- -->![](README_files/figure-gfm/unnamed-chunk-11-10.png)<!-- -->
