@@ -9,7 +9,7 @@ editor_options:
 knitr::opts_chunk$set(echo = FALSE, results = FALSE, message=FALSE, warning=FALSE)
 ```
 
-<img src="https://www2.mnstate.edu/uploadedImages/Content/Marketing/logos/MSUM_Signature_Vert_Color.jpg" alt="MSUM logo" width="200" style="float:right">
+<img src="https://www2.mnstate.edu/uploadedImages/Content/Marketing/logos/MSUM_Signature_Vert_Color.jpg" alt="MSUM logo" width="200" style="float:right"/>
 
 # Cause of Reduced Dispersal in island Komodo Dragon
 
@@ -19,7 +19,8 @@ Kristofer Sando and Chris Merkord
 
 Presentation ID: 4931
 
-Biosciences Department, Minnesota State University Moorhead, 1104 7th Avenue South, Moorhead, MN 56563 USA
+Biosciences Department, Minnesota State University Moorhead, 1104 7th
+Avenue South, Moorhead, MN 56563 USA
 
 ## Abstract
 
